@@ -1,0 +1,326 @@
+'@type': "SoftwareComponentType"
+createdDate: "2017-05-07T12:59:32.236Z"
+lastUpdated: "2017-12-30T18:26:03.049Z"
+id: "Software.EpOpsLinux"
+name: "EpOps Linux Agent"
+description: "Installs the Linux Endpoint Operations Manager agent on a system. It\
+  \ assumes the RPM is used including JRE. cifs-utils will also be installed as part\
+  \ of this deployment. Customize the Properties to fit your environment."
+publishStatus: "PUBLISHED"
+publishStatusName: "Published"
+schema:
+  fields:
+  - id: "serveraddress"
+    label: "serveraddress"
+    description: "Location of vROps Master or cluster address."
+    dataType:
+      type: "primitive"
+      typeId: "STRING"
+    state:
+      dependencies: []
+      facets:
+      - type: "derivedValue"
+        value:
+          type: "constant"
+          value:
+            type: "string"
+            value: "vrops.domain.com"
+      - type: "mandatory"
+        value:
+          type: "constant"
+          value:
+            type: "boolean"
+            value: true
+    isMultiValued: false
+  - id: "password"
+    label: "password"
+    description: "Password to use to register the agent."
+    dataType:
+      type: "primitive"
+      typeId: "SECURE_STRING"
+    state:
+      dependencies: []
+      facets:
+      - type: "mandatory"
+        value:
+          type: "constant"
+          value:
+            type: "boolean"
+            value: true
+      - type: "derivedValue"
+        value:
+          type: "constant"
+          value:
+            type: "secureString"
+            value: "VMware1!"
+      - type: "encrypted"
+        value:
+          type: "constant"
+          value:
+            type: "boolean"
+            value: true
+    isMultiValued: false
+  - id: "sharepassword"
+    label: "sharepassword"
+    description: "SMB share password"
+    dataType:
+      type: "primitive"
+      typeId: "SECURE_STRING"
+    state:
+      dependencies: []
+      facets:
+      - type: "mandatory"
+        value:
+          type: "constant"
+          value:
+            type: "boolean"
+            value: true
+      - type: "derivedValue"
+        value:
+          type: "constant"
+          value:
+            type: "secureString"
+            value: "VMware1!"
+      - type: "encrypted"
+        value:
+          type: "constant"
+          value:
+            type: "boolean"
+            value: true
+    isMultiValued: false
+  - id: "sharefile"
+    label: "sharefile"
+    description: "Name of the EpOps agent package in RPM format."
+    dataType:
+      type: "primitive"
+      typeId: "STRING"
+    state:
+      dependencies: []
+      facets:
+      - type: "derivedValue"
+        value:
+          type: "constant"
+          value:
+            type: "string"
+            value: "vRealize-Endpoint-Operations-Management-Agent-x86-64-linux-6.6.1-6091118.rpm"
+      - type: "mandatory"
+        value:
+          type: "constant"
+          value:
+            type: "boolean"
+            value: true
+    isMultiValued: false
+  - id: "host"
+    label: "Container"
+    description: ""
+    dataType:
+      type: "ref"
+      componentTypeId: "com.vmware.csp.iaas.blueprint.service"
+      classId: "Infrastructure.Machine.Schema"
+      label: "Machine"
+    state:
+      dependencies: []
+      facets:
+      - type: "visible"
+        value:
+          type: "constantClause"
+          value:
+            type: "boolean"
+            value: false
+      - type: "internal"
+        value:
+          type: "constantClause"
+          value:
+            type: "boolean"
+            value: true
+      - type: "mandatory"
+        value:
+          type: "constant"
+          value:
+            type: "boolean"
+            value: true
+    isMultiValued: false
+  - id: "certthumbprint"
+    label: "certthumbprint"
+    description: "Thumbprint of the vROps certificate. If the certificate has not\
+      \ been replaced, the thumbprint can be viewed by logging into https://<vropsFQDN>/admin\
+      \ and clicking the gold medallion in the upper-right of the screen. The second\
+      \ listed thumbprint is the one needed here."
+    dataType:
+      type: "primitive"
+      typeId: "STRING"
+    state:
+      dependencies: []
+      facets:
+      - type: "derivedValue"
+        value:
+          type: "constant"
+          value:
+            type: "string"
+            value: "A6:CA:42:98:EE:6F:04:11:2F:B8:53:FD:70:12:68:47:0E:68:A6:D9"
+      - type: "mandatory"
+        value:
+          type: "constant"
+          value:
+            type: "boolean"
+            value: true
+    isMultiValued: false
+  - id: "shareusername"
+    label: "shareusername"
+    description: "SMB share username (user@domain.com)"
+    dataType:
+      type: "primitive"
+      typeId: "STRING"
+    state:
+      dependencies: []
+      facets:
+      - type: "derivedValue"
+        value:
+          type: "constant"
+          value:
+            type: "string"
+            value: "user@domain.com"
+      - type: "mandatory"
+        value:
+          type: "constant"
+          value:
+            type: "boolean"
+            value: true
+    isMultiValued: false
+  - id: "sharepathname"
+    label: "sharepathname"
+    description: "SMB share path. Begin with double forward slashes. (//server/share/)"
+    dataType:
+      type: "primitive"
+      typeId: "STRING"
+    state:
+      dependencies: []
+      facets:
+      - type: "derivedValue"
+        value:
+          type: "constant"
+          value:
+            type: "string"
+            value: "//server.domain.com/data/"
+      - type: "mandatory"
+        value:
+          type: "constant"
+          value:
+            type: "boolean"
+            value: true
+    isMultiValued: false
+  - id: "username"
+    label: "username"
+    description: "Username to register against vROps. Must have permission to manage\
+      \ EpOps agents."
+    dataType:
+      type: "primitive"
+      typeId: "STRING"
+    state:
+      dependencies: []
+      facets:
+      - type: "derivedValue"
+        value:
+          type: "constant"
+          value:
+            type: "string"
+            value: "admin"
+      - type: "mandatory"
+        value:
+          type: "constant"
+          value:
+            type: "boolean"
+            value: true
+    isMultiValued: false
+containerFieldId: "host"
+lifecycleTasks:
+- createdDate: "2017-05-07T12:59:32.246Z"
+  lastUpdated: "2017-12-30T18:26:03.049Z"
+  script:
+    scriptContent: "#!/bin/bash\nsudo /opt/vmware/epops-agent/bin/ep-agent.sh setup\n\
+      sleep 10\n######Verify the agent is actually running and has successfully connected\
+      \ to the server.\necho \"=============================\"\necho \"=============================\"\
+      \necho \"Checking EpOps agent status.\"\n/opt/vmware/epops-agent/bin/ep-agent.sh\
+      \ status\nif\n      /opt/vmware/epops-agent/bin/ep-agent.sh status | grep -e\
+      \ 'Unable' -e 'Agent not yet setup';\nthen\n      echo \"------EpOps failed\
+      \ to start or was unable to connect to the server.------\"\n      exit 1\nelse\n\
+      \      echo \"++++++EpOps has been successfully installed and configured!++++++\"\
+      \nfi"
+    isRebootAfter: false
+    scriptTypeId: "Bash"
+  taskDescriptorRef:
+    id: "START"
+    label: "Start"
+- createdDate: "2017-05-07T12:59:32.244Z"
+  lastUpdated: "2017-12-30T18:26:03.049Z"
+  script:
+    scriptContent: "#! /bin/bash\nsed -i \"s/#agent.setup.serverIP=localhost/agent.setup.serverIP=$serveraddress/g\"\
+      \ /opt/vmware/epops-agent/conf/agent.properties\nsed -i \"s/#agent.setup.serverSSLPort=443/agent.setup.serverSSLPort=443/g\"\
+      \ /opt/vmware/epops-agent/conf/agent.properties\nsed -i \"s/#agent.setup.serverLogin=username/agent.setup.serverLogin=$username/g\"\
+      \ /opt/vmware/epops-agent/conf/agent.properties\nsed -i \"s/#agent.setup.serverPword=password/agent.setup.serverPword=$password/g\"\
+      \ /opt/vmware/epops-agent/conf/agent.properties\nsed -i \"s/#agent.setup.serverCertificateThumbprint=/agent.setup.serverCertificateThumbprint=$certthumbprint/g\"\
+      \ /opt/vmware/epops-agent/conf/agent.properties\necho \"++++++The agent.properties\
+      \ file has been configured.++++++\"\necho \"Changing runas user to root.\"\n\
+      sed -i \"s/RUN_AS_USER=epops/RUN_AS_USER=root/g\" /etc/init.d/epops-agent"
+    isRebootAfter: false
+    scriptTypeId: "Bash"
+  taskDescriptorRef:
+    id: "CONFIGURE"
+    label: "Configure"
+- createdDate: "2017-05-07T12:59:32.243Z"
+  lastUpdated: "2017-12-30T18:26:03.049Z"
+  script:
+    scriptContent: "#! /bin/bash\n######Install cifs-utils\nsudo yum -y install cifs-utils\n\
+      ######Get and install the RPM package\nsudo mkdir /mnt/vrafiles\nsudo mount\
+      \ -t cifs -o username=$shareusername,password=$sharepassword $sharepathname\
+      \ /mnt/vrafiles\ncp /mnt/vrafiles/$sharefile /tmp/epops.rpm\nif [ -f \"/tmp/epops.rpm\"\
+      \ ]\nthen\n    echo \"EpOps agent was successfully copied.\"\nelse\n    echo\
+      \ \"EpOps agent was not found. Aborting.\"\n    exit 1\nfi\nchmod +x /tmp/epops.rpm\n\
+      rpm -i /tmp/epops.rpm\n######Clean up stage\numount /mnt/vrafiles\nrm -rf /mnt/vrafiles\n\
+      rm -rf /tmp/epops.rpm\n#############"
+    isRebootAfter: false
+    scriptTypeId: "Bash"
+  taskDescriptorRef:
+    id: "INSTALL"
+    label: "Install"
+- createdDate: "2017-10-05T18:15:43.654Z"
+  lastUpdated: "2017-12-30T18:26:03.049Z"
+  script:
+    scriptContent: "##################################\n######Install PowerShell Core\
+      \ for Linux\ncurl https://packages.microsoft.com/config/rhel/7/prod.repo | sudo\
+      \ tee /etc/yum.repos.d/microsoft.repo\nyum install -y powershell\ncat > /tmp/epops-uninstall.ps1\
+      \ <<'_EOF'\n######For testing, continue if any errors result.\n#$ErrorActionPreference\
+      \ = 'SilentlyContinue'\n######Stop the EpOps service before proceeding\n#Stop-Service\
+      \ -Name \"*End Point Operations*\"\n######Get the hostname to use in the REST\
+      \ request.\n$thisvm = /usr/bin/hostname\n######Start the work.\n$username =\
+      \ 'replUsername'\n$password = 'replPassword'\n$serveraddress = 'replServeraddress'\n\
+      $secpw = ConvertTo-SecureString $password -AsPlainText -Force\n$cred = New-Object\
+      \ PSCredential -ArgumentList $username,$secpw\n$data = Invoke-RestMethod -Method\
+      \ GET -Uri https://$serveraddress/suite-api/api/resources/?name=$thisvm -Credential\
+      \ $cred -SkipCertificateCheck\n##############\n#Get the parent resource ID of\
+      \ the top-level object which is either WINDOWS or LINUX.\n$parentObject = ($data.resources.resource\
+      \ | where {$_.resourceKey.resourceKindKey -eq \"LINUX\"}).identifier\nWrite-Output\
+      \ \"Parent is $parentObject.\"\n#Determine all the child objects (EpOps agent,\
+      \ custom service/process monitoring, etc.)\n$childrenOfWindows = Invoke-RestMethod\
+      \ -Method GET -Uri https://$serveraddress/suite-api/api/resources/$parentObject/relationships/children\
+      \ -Credential $cred -SkipCertificateCheck\n$allChildren = $childrenOfWindows.'resource-relation'.resource.identifier\n\
+      Write-Output \"Children are $allChildren.\"\nforeach ($child in $allChildren)\n\
+      \    {\n    Write-Output \"Removing $child.\"\n    Invoke-RestMethod -Method\
+      \ DELETE -Uri https://$serveraddress/suite-api/api/resources/$child -Credential\
+      \ $cred -ErrorVariable $errors -ErrorAction SilentlyContinue -SkipCertificateCheck\n\
+      \    }\n#Finally, remove the parent object.\nWrite-Output \"Lastly, removing\
+      \ the parent $parentObject.\"\nInvoke-RestMethod -Method DELETE -Uri https://$serveraddress/suite-api/api/resources/$parentObject\
+      \ -Credential $cred -ErrorVariable $errors -ErrorAction SilentlyContinue -SkipCertificateCheck\n\
+      Write-Output \"Errors are as follows: $errors\"\n_EOF\n######Execute PowerShell\
+      \ script\necho \"=========\"\necho \"=========\"\necho \"Replacing variables.\"\
+      \nsed -i \"s/replUsername/$username/g\" /tmp/epops-uninstall.ps1\nsed -i \"\
+      s/replPassword/$password/g\" /tmp/epops-uninstall.ps1\nsed -i \"s/replServeraddress/$serveraddress/g\"\
+      \ /tmp/epops-uninstall.ps1\n#echo \"Contents of the PS1 script.\"\n#cat /tmp/epops-uninstall.ps1\n\
+      echo \"=========\"\necho \"=========\"\necho \"Changing permissions and executing\
+      \ script with `/usr/bin/pwsh -v`.\"\nchmod +x /tmp/epops-uninstall.ps1\n/usr/bin/env\
+      \ pwsh -ExecutionPolicy Bypass -File /tmp/epops-uninstall.ps1\n#PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:/root/bin"
+    isRebootAfter: false
+    scriptTypeId: "Bash"
+  taskDescriptorRef:
+    id: "TEARDOWN"
+    label: "Uninstall"

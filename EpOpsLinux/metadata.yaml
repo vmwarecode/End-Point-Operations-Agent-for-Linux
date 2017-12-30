@@ -1,0 +1,9 @@
+name: "auto-generated-pkg-8bbe03ce-8586-4a6f-b616-991f3f4ce8f6"
+productVersion: "7.3.0-SNAPSHOT"
+data:
+- locator: "software-component/Software.EpOpsLinux.yaml"
+  name: "EpOps Linux Agent"
+  description: "Installs the Linux Endpoint Operations Manager agent on a system.\
+    \ It assumes the RPM is used including JRE. cifs-utils will also be installed\
+    \ as part of this deployment. Customize the Properties to fit your environment."
+exportTime: "2017-12-30T19:55:47.762Z"
